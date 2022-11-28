@@ -3,7 +3,7 @@ import axios from "axios";
 import "./PostItem.css";
 import AuthContext from "../store/authContext";
 
-const PostItem = ({ post, getAllPosts, Saved }) => {
+const PostItem = ({ post, getAllPosts, myPosts }) => {
   const authCtx = useContext(AuthContext);
 
   const [editing, setEditing] = useState(false);
@@ -20,18 +20,18 @@ const PostItem = ({ post, getAllPosts, Saved }) => {
 
     axios
       .put("/post", body)
-      .then(res => {
+      .then((res) => {
         setEditing(false);
         getAllPosts();
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const saveToMyPosts = () => {
     axios
       .post("/mypost", { userId: authCtx.userId, postId: post.id })
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err));
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   };
 
   console.log(post);
@@ -45,7 +45,11 @@ const PostItem = ({ post, getAllPosts, Saved }) => {
           <p>Artist: {post.artist}</p>
           <p>Genre: {post.genre}</p>
           <p>comment: {post.comment}</p>
-          <button onClick={() => saveToMyPosts()}>Save Song</button>
+          {myPosts ? (
+            <button>Remove</button>
+          ) : (
+            <button onClick={() => saveToMyPosts()}>Save Song</button>
+          )}
         </div>
       ) : (
         <form onSubmit={(e) => updatePost(e)}>
@@ -83,9 +87,11 @@ const PostItem = ({ post, getAllPosts, Saved }) => {
         </form>
       )}
 
-      <button onClick={() => setEditing(!editing)}>
-        {editing ? "Cancel Changes" : "Edit Loadout"}
-      </button>
+      {!myPosts ? (
+        <button onClick={() => setEditing(!editing)}>
+          {editing ? "Cancel Changes" : "Edit Loadout"}
+        </button>
+      ) : null}
     </div>
   );
 };

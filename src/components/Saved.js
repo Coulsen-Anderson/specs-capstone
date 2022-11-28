@@ -20,7 +20,7 @@ function MyPosts () {
     return (
         <div>
             {myposts.map(post => {
-                return <PostItem post={post.post} />
+                return <PostItem post={post.post} savedPosts={true} />
             })}
         </div>
     )
