@@ -1,4 +1,4 @@
-require("dotenv").congif();
+require("dotenv").config();
 const { SECRET } = process.env;
 const { User } = require("../models/user");
 const bcrypt = require("bcryptjs");
@@ -22,7 +22,7 @@ module.exports = {
     try {
       const { username, password } = req.body;
       let foundUser = await User.findOne({ where: { username } });
-      if (findUser) {
+      if (foundUser) {
         res.status(400).send("Username has already been taken");
       } else {
         const salt = bcrypt.genSaltSync(10);
@@ -62,7 +62,7 @@ module.exports = {
           const exp = Date.now() + 1000 * 60 * 60 * 48;
           res.status(200).send({
             username: foundUser.dataValues.username,
-            password: foundUser.dataValues.password,
+            userId: foundUser.dataValues.id,
             token,
             exp,
           });

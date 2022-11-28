@@ -10,7 +10,10 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        songId: DataTypes.STRING,
+        songTitle: DataTypes.STRING,
+        album: DataTypes.STRING,
+        artist: DataTypes.STRING,
+        genre: DataTypes.STRING,
         comment: DataTypes.STRING
 
     })

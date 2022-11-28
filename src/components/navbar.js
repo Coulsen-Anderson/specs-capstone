@@ -4,15 +4,18 @@ export default function Navbar() {
     return <nav className="nav">
         <Link to="/" className="site-title">Toon Boon</Link>
         <ul>
-            <li>
+            
                 <CustomLink to="/home">Home</CustomLink>
-            </li>
-            <li>
+            
+            
                 <CustomLink to="/create-post">Create Post</CustomLink>
-            </li>
-            <li>
+            
+            
                 <CustomLink to="/saved-posts">Saved Posts</CustomLink>
-            </li>
+            
+            
+                <CustomLink to="/auth">Login</CustomLink>
+            
         </ul>
     </nav>
 }
