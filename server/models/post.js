@@ -14,6 +14,7 @@ module.exports = {
         album: DataTypes.STRING,
         artist: DataTypes.STRING,
         genre: DataTypes.STRING,
+        albumCover: DataTypes.STRING,
         comment: DataTypes.STRING
 
     })

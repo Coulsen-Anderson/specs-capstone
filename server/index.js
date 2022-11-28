@@ -37,10 +37,11 @@ app.post('/login', login)
 
 //songPost endpoints
 app.post('/post/:userId', addPost)
-app.post('/post', editPost)
+app.put('/post', editPost)
 app.get('/post', getAllPosts)
 app.post('/mypost', addToMyPosts)
 app.get('/mypost/:userId', getMyPosts)
+app.delete('/mypost')
 
 
 

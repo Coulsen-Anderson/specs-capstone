@@ -1,7 +1,7 @@
 import {useState, useContext} from 'react'
 import axios from 'axios'
-
 import AuthContext from '../store/authContext'
+import './auth.css'
 
 const Auth = () => {
     const [register, setRegister] = useState(true)
@@ -39,7 +39,7 @@ const Auth = () => {
 
     return (
         <main>
-            <h1>Welcome!</h1>
+            <h1 className='welcome'>Welcome!</h1>
             <form className='form auth-form' onSubmit={submitHandler}>
                 <input 
                     type='text' 
@@ -58,7 +58,7 @@ const Auth = () => {
                 </button>
             </form>
             <p style={{display: display}} className='auth-msg'>{message}</p>
-            <button className='form-btn' onClick={() => setRegister(!register)}>
+            <button className='button' onClick={() => setRegister(!register)}>
                 Need to {register ? 'Login' : 'Sign Up'}?
             </button>
         </main>

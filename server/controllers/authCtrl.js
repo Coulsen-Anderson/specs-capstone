@@ -27,18 +27,13 @@ module.exports = {
       } else {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
-        const newUser = await User.create({ username, hashedPass: hash });
+        const newUser = await User.create({ username, password: hash });
         const token = createToken(
           newUser.dataValues.username,
           newUser.dataValues.id
         );
-        const exp = Date.now() + 1000 * 60 * 60 * 48;
-        res.status(200).send({
-          username: newUser.dataValues.username,
-          password: newUser.dataValues.password,
-          token,
-          exp,
-        });
+        
+        res.status(200)
       }
     } catch (error) {
       res.sendStatus(400);
@@ -49,10 +44,11 @@ module.exports = {
     try {
       const { username, password } = req.body;
       let foundUser = await User.findOne({ where: { username } });
+      console.log(foundUser)
       if (foundUser) {
         const isAuthenticated = bcrypt.compareSync(
           password,
-          foundUser.hashedPass
+          foundUser.dataValues.password
         );
         if (isAuthenticated) {
           const token = createToken(

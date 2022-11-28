@@ -1,0 +1,45 @@
+.welcome {
+    text-align: center;
+    color: #CCDAD1;
+    font-family: sans-serif;
+
+}
+
+.form-input {
+    border-radius: 5px;
+}
+
+.button {
+    background-color: black;
+    color: white;
+    padding: 15px 15px;
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+}
+
+.button:hover {
+    background-color: gray;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.form-btn {
+    background-color: black;
+    color: white;
+    padding: 15px 15px;
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+}
+
+.form-btn:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}

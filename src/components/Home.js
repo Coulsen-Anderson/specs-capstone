@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import PostItem from '../Elements/PostItem'
+import '../styles.css'
 
 const Home = () => {
     const [posts, setPosts] = useState([])
@@ -14,7 +15,7 @@ const Home = () => {
     useEffect(getAllPosts,[])
 
     return (
-        <div>
+        <div>         
             {posts.map(post => {
                 return <PostItem key={post.id}
                 post={post} getAllPosts={getAllPosts}/>

@@ -5,10 +5,10 @@ const { SavedPost } = require("../models/saved_post");
 module.exports = {
   addPost: async (req, res) => {
     try {
-      const { songTitle, album, artist, genre, comment } = req.body;
+      const { songTitle, album, artist, genre, albumCover, comment } = req.body;
       const { userId } = req.params;
 
-      await Post.create({ songTitle, album, artist, genre, comment, userId });
+      await Post.create({ songTitle, album, artist, genre, albumCover, comment, userId });
 
       res.sendStatus(200);
     } catch (err) {
@@ -16,12 +16,13 @@ module.exports = {
       res.sendStatus(500);
     }
   },
+
   editPost: async (req, res) => {
     try {
-      const { songTitle, album, artist, genre, comment } = req.body;
+      const { Postid, songTitle, album, artist, genre, albumCover, comment } = req.body;
       await Post.update(
-        { songTitle, album, artist, genre, comment },
-        { where: { id: +postId } }
+        { songTitle, album, artist, genre, albumCover, comment },
+        { where: { id: +Postid } }
       );
 
       res.sendStatus(200);
@@ -30,9 +31,10 @@ module.exports = {
       res.sendStatus(500);
     }
   },
+
   getAllPosts: async (req, res) => {
     try {
-      const posts = await Post.findAll({
+      const post = await Post.findAll({
         include: [
           {
             model: User,
@@ -41,12 +43,13 @@ module.exports = {
           },
         ],
       });
-      res.status(200).send(Post);
+      res.status(200).send(post);
     } catch (err) {
       console.log(err);
       res.sendStatus(500);
     }
   },
+
   addToMyPosts: async (req, res) => {
     try {
       const { userId, postId } = req.body;
@@ -59,10 +62,11 @@ module.exports = {
       res.sendStatus(500);
     }
   },
+
   getMyPosts: async (req, res) => {
     try {
         const {userId} = req.params
-        const SavedPost = await SavedPost.findAll({
+        const posts = await SavedPost.findAll({
             where: {userId},
             include: [{
                 model: Post,
@@ -74,10 +78,14 @@ module.exports = {
                   }
             }]
         })
-        res.status(200).send(SavedPost)
+        res.status(200).send(posts)
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
   }
+},
+
+deleteSavedPost: async (req, res) => {
+
 }
 }
