@@ -3,7 +3,7 @@ import axios from "axios";
 import "./PostItem.css";
 import AuthContext from "../store/authContext";
 
-const PostItem = ({ post, getAllPosts, myposts }) => {
+const PostItem = ({ post, getAllPosts, savedPosts }) => {
   const authCtx = useContext(AuthContext);
 
   const [editing, setEditing] = useState(false);
@@ -44,6 +44,7 @@ const PostItem = ({ post, getAllPosts, myposts }) => {
   };
 
   console.log(post);
+  console.log(savedPosts)
   return (
     <section className="container">
       <div className="post-card">
@@ -62,7 +63,7 @@ const PostItem = ({ post, getAllPosts, myposts }) => {
             <p className="postInputs">{post.genre}</p>
             <p className="postInputs">{post.comment}</p>
             <h4 className="postElements">Post made by {post.user.username}</h4>
-            {myposts ? (
+            {savedPosts ? (
               <button className="button">Remove</button>
             ) : (
               <button onClick={() => saveToMyPosts()} className="button">
@@ -118,7 +119,7 @@ const PostItem = ({ post, getAllPosts, myposts }) => {
           </form>
         )}
 
-        {!myposts ? (
+        {!savedPosts ? (
           <button onClick={() => setEditing(!editing)} className="button">
             {editing ? "Cancel Changes" : "Edit Post"}
           </button>
